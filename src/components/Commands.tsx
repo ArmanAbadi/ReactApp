@@ -1,8 +1,23 @@
 'use client'
 import React, { useEffect } from 'react'
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import { db } from '../firebaseSetup/config';
+import { getFunctions, httpsCallable } from 'firebase/functions';
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: 'AIzaSyC2wctSVEFXGSwEy1N5866udMXUQqTHKYc',
+  authDomain: 'eaec-79c34.firebaseapp.com',
+  projectId: 'eaec-79c34',
+  storageBucket: 'eaec-79c34.firebasestorage.app',
+  messagingSenderId: '230435794102',
+  appId: '1:230435794102:web:65c1197186babd8e63ca17',
+}
+
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+const functions = getFunctions(app);
 
 async function Commands1(){
   const vehicle = doc(db, "vehicles", "vehicle1");
@@ -105,10 +120,24 @@ function SetMotorRPMText(MotorRPM: number){
   const MotorRPMText = document.getElementById("MotorRPMText") as HTMLImageElement;
   MotorRPMText.textContent = MotorRPM.toString();
 }
+
+const addMessage = httpsCallable(functions, 'addMessage');
+addMessage({
+  uploadType: "Albums",
+  albumName: "TheBestAlbumEver",
+  fileName: "Bravado.wav",
+  SongTitle: "wop wop",
+  description: "dark and edgy"
+})
+  .then((result : any) => {
+    console.log(result);
+  });
+
 const Commands ={
   Commands1,
   Commands2,
-  GetData
+  GetData,
+  addMessage
 }
 
 export default Commands;

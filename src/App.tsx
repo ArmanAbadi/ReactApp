@@ -43,6 +43,8 @@ function App() {
             <img src = {require('./public/MotorRPM.png')}></img>
             <img src = {require('./public/BatteryTemperature.png')}></img>
           </div>
+
+          <button onClick={Commands.addMessage}>Take the Shot!</button>
     </>
   )
 }
