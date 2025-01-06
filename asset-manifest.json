@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/ReactApp/static/css/main.f7176cf0.css",
-    "main.js": "/ReactApp/static/js/main.e220f36b.js",
+    "main.js": "/ReactApp/static/js/main.5bb575cc.js",
     "static/js/453.f39ec6d9.chunk.js": "/ReactApp/static/js/453.f39ec6d9.chunk.js",
     "static/media/PowerGuage.png": "/ReactApp/static/media/PowerGuage.4d2265564677babd5d3c.png",
     "static/media/MotorRPMGuage.png": "/ReactApp/static/media/MotorRPMGuage.d57e8e0cc794a8c23b2f.png",
     "index.html": "/ReactApp/index.html",
     "main.f7176cf0.css.map": "/ReactApp/static/css/main.f7176cf0.css.map",
-    "main.e220f36b.js.map": "/ReactApp/static/js/main.e220f36b.js.map",
+    "main.5bb575cc.js.map": "/ReactApp/static/js/main.5bb575cc.js.map",
     "453.f39ec6d9.chunk.js.map": "/ReactApp/static/js/453.f39ec6d9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f7176cf0.css",
-    "static/js/main.e220f36b.js"
+    "static/js/main.5bb575cc.js"
   ]
 }
