@@ -8,6 +8,7 @@ import MotorRPMGuage from './components/MotorRPMGuage';
 import BatteryPercentage from './components/BatteryPercentage';
 import BatteryTemperature from './components/BatteryTemperature';
 import MotorRPM from './components/MotorRPM';
+import MotorSpeedSettings from './components/MotorSpeedSettings';
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
             <BatteryPercentage></BatteryPercentage>
             <BatteryTemperature></BatteryTemperature>
             <MotorRPM></MotorRPM>
-            <img src = {require('./public/MotorSpeedSetting.png')}></img>
+            <MotorSpeedSettings></MotorSpeedSettings>
           </div>
 
           <div className="TopIconsGroup TopIcons">
@@ -44,7 +45,9 @@ function App() {
             <img src = {require('./public/BatteryTemperature.png')}></img>
           </div>
 
-          <button onClick={Commands.addMessage}>Take the Shot!</button>
+          <button onClick={() =>Commands.AddMessage()
+}>Take the Shot!</button>
+          <button>asd</button>
     </>
   )
 }

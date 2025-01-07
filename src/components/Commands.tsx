@@ -122,22 +122,25 @@ function SetMotorRPMText(MotorRPM: number){
 }
 
 const addMessage = httpsCallable(functions, 'addMessage');
-addMessage({
-  uploadType: "Albums",
-  albumName: "TheBestAlbumEver",
-  fileName: "Bravado.wav",
-  SongTitle: "wop wop",
-  description: "dark and edgy"
-})
-  .then((result : any) => {
-    console.log(result);
-  });
+function AddMessage(){ 
+    addMessage({
+    uploadType: "Albums",
+    albumName: "TheBestAlbumEver",
+    fileName: "Bravado.wav",
+    SongTitle: "wop wop",
+    description: "dark and edgy"
+  })
+    .then((result) => {
+      console.log("bro");
+      console.log(result);
+    });
+  }
 
 const Commands ={
   Commands1,
   Commands2,
   GetData,
-  addMessage
+  AddMessage
 }
 
 export default Commands;
