@@ -5,7 +5,7 @@ This is a React app which retrieves data from a firestore database and sends api
 ## To Run
 
 1. Clone this project https://github.com/ArmanAbadi/ReactApp.git
-2. Open the project folder and run:
+2. Open the project folder and run
 	npm install
 3. Local build
 	npm start
