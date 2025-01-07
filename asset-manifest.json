@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ReactApp/static/css/main.37bbb310.css",
-    "main.js": "/ReactApp/static/js/main.ea94d2b7.js",
+    "main.css": "/ReactApp/static/css/main.8b6857db.css",
+    "main.js": "/ReactApp/static/js/main.90aa1b75.js",
     "static/js/453.f39ec6d9.chunk.js": "/ReactApp/static/js/453.f39ec6d9.chunk.js",
     "static/media/PowerGuage.png": "/ReactApp/static/media/PowerGuage.4d2265564677babd5d3c.png",
     "static/media/MotorRPMGuage.png": "/ReactApp/static/media/MotorRPMGuage.d57e8e0cc794a8c23b2f.png",
     "index.html": "/ReactApp/index.html",
-    "main.37bbb310.css.map": "/ReactApp/static/css/main.37bbb310.css.map",
-    "main.ea94d2b7.js.map": "/ReactApp/static/js/main.ea94d2b7.js.map",
+    "main.8b6857db.css.map": "/ReactApp/static/css/main.8b6857db.css.map",
+    "main.90aa1b75.js.map": "/ReactApp/static/js/main.90aa1b75.js.map",
     "453.f39ec6d9.chunk.js.map": "/ReactApp/static/js/453.f39ec6d9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.37bbb310.css",
-    "static/js/main.ea94d2b7.js"
+    "static/css/main.8b6857db.css",
+    "static/js/main.90aa1b75.js"
   ]
 }
