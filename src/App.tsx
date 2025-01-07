@@ -12,7 +12,7 @@ import MotorSpeedSettings from './components/MotorSpeedSettings';
 
 function App() {
 
-  // Similar to componentDidMount and componentDidUpdate:
+  // Retrieves the Vehicle data from firebase and updates UI
   useEffect(() => {
     Commands.GetData()
   });
@@ -40,14 +40,12 @@ function App() {
           </div>
 
           <div className="TopIconsGroup TopIcons">
-            <img src = {require('./public/GearRatio.png')}></img>
-            <img src = {require('./public/MotorRPM.png')}></img>
-            <img src = {require('./public/BatteryTemperature.png')}></img>
+            <img src = {require('./public/GearRatiov2.png')}></img>
+            <img src = {require('./public/MotorRPMv2.png')}></img>
+            <img src = {require('./public/BatteryTemperaturev2.png')}></img>
+            <img src = {require('./public/ViewMenuButton.png')} className="ViewMenuButton"></img>
+            <img src = {require('./public/ChargingButton.png')} className ="ChargingButton" id="ChargingButton" onClick={() => Commands.setCharging()}></img>
           </div>
-
-          <button onClick={() =>Commands.AddMessage()
-}>Take the Shot!</button>
-          <button>asd</button>
     </>
   )
 }

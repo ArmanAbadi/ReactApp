@@ -90,7 +90,7 @@ body {
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 98%; /* Full-width */
+  width: 100%; /* Full-width */
   height: 15px;
   border-radius: 5px;  
   background: #414141; /* Grey background */
@@ -100,7 +100,7 @@ body {
   transition: opacity .2s;
   position: absolute;
   top: 55px;
-  right: -5px;
+  right: -10px;
 }
 
 /* Mouse-over effects */
@@ -130,4 +130,14 @@ body {
   background: #ffffff; /* Green background */
   cursor: pointer; /* Cursor on hover */
   opacity: 1.0;
+}
+
+.ViewMenuButton{
+  position: absolute;
+  right: 50%;
+}
+
+.ChargingButton{
+  position: absolute;
+  right: 50px;
 }

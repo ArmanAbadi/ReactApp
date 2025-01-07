@@ -5,7 +5,7 @@ const PowerGuage = () => {
   return (
     <div className="parentContainer">
       <img src = {require('../public/PowerGuage.png')}></img>
-      <div className="GuageReadout" id="PowerGuage">0</div>
+      <div className="GuageReadout" id="PowerGuageText">0</div>
       <div id="PowerConsumptionNeedleGuage" className="NeedleGuageContainer">
         <img className="NeedleGuage" src = {require('../public/NeedleGuage.png')}></img>
       </div>

@@ -5,7 +5,7 @@ const MotorRPM = () => {
   return (
     <div className='parentContainer'>
         <img src = {require('../public/MotorRPM.png')}></img>
-        <div id="MotorRPMText" className='MotorRPMText'><div></div></div>
+        <div id="MotorRPMTextSmall" className='MotorRPMText'>0</div>
     </div>
 )
 }

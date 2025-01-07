@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
@@ -19,19 +19,7 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const functions = getFunctions(app);
 
-async function Commands1(){
-  const vehicle = doc(db, "vehicles", "vehicle1");
-  await updateDoc(vehicle, {
-    BatteryLowIndicator: false
-  });
-}
-
-async function Commands2(){
-  const vehicle = doc(db, "vehicles", "vehicle1");
-  await updateDoc(vehicle, {
-    CheckEngineIndicator: false
-  });
-}
+var Charging = false;
 
 // -< Firestore >-
 async function GetData(){
@@ -39,28 +27,42 @@ async function GetData(){
   const snapshot = await getDocs(postsRef)
   const vehicles = snapshot.docs;
 
-  SetParkingIndicator(vehicles[0].data().ParkingBrakeIndicator);
-  SetCheckEngineIndicator(vehicles[0].data().CheckEngineIndicator);
-  SetMotorStatusIndicator(vehicles[0].data().MotorStatusIndicator);
-  SetBatteryLowIndicator(vehicles[0].data().BatteryLowIndicator);
+  SetData(vehicles[0].data());
 
-  SetMotorNeedleGuage(vehicles[0].data().MotorRPM);
-  SetPowerConsumption(vehicles[0].data().PowerConsumption);
-
-  
-  SetBatteryPercentageText(vehicles[0].data().BatteryPercentage);
-  SetBatteryTemperatureText(vehicles[0].data().BatteryTemperature);
-  SetMotorRPMText(vehicles[0].data().MotorRPM);
   return (
     <>
     </>
   )
 }
 
+//Updates the UI based on vehicle data
+function SetData(vehicle: any){
+
+  SetParkingIndicator(vehicle.ParkingBrakeIndicator);
+  SetCheckEngineIndicator(vehicle.CheckEngineIndicator);
+  SetMotorStatusIndicator(vehicle.MotorStatusIndicator);
+  SetBatteryLowIndicator(vehicle.BatteryLowIndicator);
+
+  SetMotorNeedleGuage(vehicle.MotorRPM);
+  SetPowerConsumption(vehicle.PowerConsumption);
+
+  
+  SetBatteryPercentageText(vehicle.BatteryPercentage);
+  SetBatteryTemperatureText(vehicle.BatteryTemperature);
+  SetMotorRPMText(vehicle.MotorRPM);
+  SetPowerGuageText(vehicle.PowerConsumption);
+
+  SetMotorSpeedSettingSlider(vehicle.MotorSpeedSetting);
+
+  Charging = vehicle.Charging;
+
+  SetChargingIndicator(Charging);
+}
+
 function SetParkingIndicator(state: boolean){
   const ParkingIndicator = document.getElementById("ParkingIndicator") as HTMLImageElement;
   if(state){
-    ParkingIndicator.src = require('../public/BatteryTemperature.png');
+    ParkingIndicator.src = require('../public/ParkingIndicatorRed.png');
   }
   else{
     ParkingIndicator.src = require('../public/ParkingIndicator.png');
@@ -93,7 +95,6 @@ function SetBatteryLowIndicator(state: boolean){
     ParkingIndicator.src = require('../public/BatteryLowIndicator.png');
   }
 }
-
 function SetMotorNeedleGuage(RPM: number){
   const MotorRPMNeedleGuage = document.getElementById("MotorRPMNeedleGuage") as HTMLImageElement;
   const Rotation = (RPM-400)*140/400;
@@ -119,28 +120,69 @@ function SetBatteryTemperatureText(BatteryTemperature: number){
 function SetMotorRPMText(MotorRPM: number){
   const MotorRPMText = document.getElementById("MotorRPMText") as HTMLImageElement;
   MotorRPMText.textContent = MotorRPM.toString();
+
+  const MotorRPMTextSmall = document.getElementById("MotorRPMTextSmall") as HTMLImageElement;
+  MotorRPMTextSmall.textContent = MotorRPM.toString();
+}
+function SetPowerGuageText(Power: number){
+  const PowerGuageText = document.getElementById("PowerGuageText") as HTMLImageElement;
+  PowerGuageText.textContent = Power.toString();
+}
+function SetMotorSpeedSettingSlider(MotorSpeedSetting: number){
+  (document.getElementById("myRange") as HTMLInputElement).value = MotorSpeedSetting.toString();
+}
+function SetChargingIndicator(state: boolean){
+  const ParkingIndicator = document.getElementById("ChargingButton") as HTMLImageElement;
+  if(state){
+    ParkingIndicator.src = require('../public/ChargingButtonGreen.png');
+  }
+  else{
+    ParkingIndicator.src = require('../public/ChargingButton.png');
+  }
 }
 
-const addMessage = httpsCallable(functions, 'addMessage');
-function AddMessage(){ 
-    addMessage({
-    uploadType: "Albums",
-    albumName: "TheBestAlbumEver",
-    fileName: "Bravado.wav",
-    SongTitle: "wop wop",
-    description: "dark and edgy"
+//Sets the motor speed through a firebase cloud function api
+const SetMotorSpeed = httpsCallable(functions, 'SetMotorSpeed');
+function setMotorSpeed(MotorSpeed: number){ 
+  console.log(MotorSpeed);
+    SetMotorSpeed({
+      MotorSpeedSetting: MotorSpeed
   })
-    .then((result) => {
-      console.log("bro");
-      console.log(result);
+    .then((result: any) => {
+      SetData(result.data);
     });
   }
 
+//Sets the motor speed through a firebase cloud function api
+const SetCharging = httpsCallable(functions, 'SetCharging');
+function setCharging(){ 
+    SetCharging({
+      Charging: !Charging
+  })
+    .then((result: any) => {
+      SetData(result.data);
+    });
+  }
+
+function SliderUpdate(){
+  var slider = (document.getElementById("myRange") as HTMLInputElement).value;
+  
+  setMotorSpeed(Number.parseInt(slider));
+}
+
+//Listen to changes to vehicle data
+onSnapshot(
+  doc(db, "vehicles", "vehicle1"), 
+  (doc) => {
+    SetData(doc.data());
+  });
+
+
+//Commands to export
 const Commands ={
-  Commands1,
-  Commands2,
   GetData,
-  AddMessage
+  SliderUpdate,
+  setCharging
 }
 
 export default Commands;
